@@ -1,0 +1,10 @@
+# Personal memory data — never commit
+memory/goals.json
+memory/reflections.json
+memory/strategies.json
+
+# Lock files
+*.lock
+
+# Editor
+.DS_Store
