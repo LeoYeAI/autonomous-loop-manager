@@ -1,25 +1,60 @@
 {
   "slug": "autonomous-loop-manager",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "name": "Autonomous Loop Manager",
-  "description": "让 Agent 拥有跨 session 的目标追求能力。目标记忆、失败记忆、策略进化，三位一体让 Agent 越用越聪明。",
+  "description": "让 Agent 拥有跨 session 的长程目标追求能力。v2 吸收 LoopX 控制面思想：quota gate、带契约的 todo、人类决策点、证据记录、边界系统。状态不依赖记忆，依赖文件。",
   "author": "MyClaw",
   "license": "MIT",
-  "publishedAt": 1781020000000,
+  "publishedAt": 1782370000000,
   "tools": [
     {
+      "name": "quota",
+      "description": "每轮入口 - 判断该不该跑（gate/stall/external）",
+      "command": "node /home/ubuntu/.openclaw/workspace/skills/autonomous-loop-manager/tools/quota.js"
+    },
+    {
+      "name": "todo",
+      "description": "带契约的工作单元 - owner/precondition/success_criteria/scope",
+      "command": "node /home/ubuntu/.openclaw/workspace/skills/autonomous-loop-manager/tools/todo.js"
+    },
+    {
+      "name": "gate",
+      "description": "人类决策点队列 - 显式标记需要用户介入的点",
+      "command": "node /home/ubuntu/.openclaw/workspace/skills/autonomous-loop-manager/tools/gate.js"
+    },
+    {
+      "name": "evidence",
+      "description": "append-only 执行记录 + 统计 - run-history.jsonl",
+      "command": "node /home/ubuntu/.openclaw/workspace/skills/autonomous-loop-manager/tools/evidence.js"
+    },
+    {
+      "name": "scope",
+      "description": "目标边界系统 - allowed/forbidden/requires_gate",
+      "command": "node /home/ubuntu/.openclaw/workspace/skills/autonomous-loop-manager/tools/scope.js"
+    },
+    {
+      "name": "daily-review",
+      "description": "每日进展审计 - velocity/blocker/recommendation",
+      "command": "node /home/ubuntu/.openclaw/workspace/skills/autonomous-loop-manager/tools/daily-review.js"
+    },
+    {
+      "name": "cron-bridge",
+      "description": "生成 OpenClaw cron heartbeat payload，接入自动调度",
+      "command": "node /home/ubuntu/.openclaw/workspace/skills/autonomous-loop-manager/tools/cron-bridge.js"
+    },
+    {
       "name": "goal-track",
-      "description": "目标追踪 - 创建/更新/查询目标进度",
+      "description": "目标追踪 - 创建/更新/查询目标进度 + 渲染 ACTIVE_STATE.md",
       "command": "node /home/ubuntu/.openclaw/workspace/skills/autonomous-loop-manager/tools/goal-track.js"
     },
     {
       "name": "reflect",
-      "description": "反思记录 - 写入/查询自我反思",
+      "description": "反思记录 - 写入/查询自我反思（v1 语义层，保留）",
       "command": "node /home/ubuntu/.openclaw/workspace/skills/autonomous-loop-manager/tools/reflect.js"
     },
     {
       "name": "strategy",
-      "description": "策略库 - 添加/查询有效策略",
+      "description": "策略库 - 添加/查询有效策略（v1 语义层，保留）",
       "command": "node /home/ubuntu/.openclaw/workspace/skills/autonomous-loop-manager/tools/strategy.js"
     },
     {
@@ -34,7 +69,7 @@
     },
     {
       "name": "recall",
-      "description": "按需加载 - manifest 只输出一行式清单省 token，expand 按需拉全文，search 跨记忆搜索",
+      "description": "按需加载 - manifest/expand/search 跨记忆高效召回",
       "command": "node /home/ubuntu/.openclaw/workspace/skills/autonomous-loop-manager/tools/recall.js"
     }
   ],

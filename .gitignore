@@ -2,6 +2,8 @@
 memory/goals.json
 memory/reflections.json
 memory/strategies.json
+memory/goals/
+
 
 # Lock files
 *.lock
